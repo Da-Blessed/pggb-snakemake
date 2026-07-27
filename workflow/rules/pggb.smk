@@ -3,6 +3,7 @@ from pathlib import Path
 
 
 ROOT = Path(workflow.basedir).parent.resolve()
+REPO_DIR = Path(workflow.basedir).resolve()
 CHROMS = config["chromosomes"]
 PARTITION_DIR = config["paths"]["partition_dir"]
 REFERENCE_DIR = config["paths"]["reference_dir"]
@@ -18,7 +19,12 @@ def resolve(path):
     return str(path if path.is_absolute() else ROOT / path)
 
 
-with open(config["paths"]["samples"]) as handle:
+def resolve_repo_path(path):
+    path = Path(path)
+    return str(path if path.is_absolute() else REPO_DIR / path)
+
+
+with open(resolve_repo_path(config["paths"]["samples"])) as handle:
     rows = list(csv.DictReader(handle, delimiter="\t"))
 
 SAMPLES = {row["sample"]: resolve(row["fasta"]) for row in rows}

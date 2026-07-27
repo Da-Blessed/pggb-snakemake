@@ -1,4 +1,4 @@
-configfile: "config/config.yaml"
+configfile: workflow.basedir + "/config/config.yaml"
 
 include: "workflow/rules/pggb.smk"
 

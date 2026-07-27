@@ -62,6 +62,24 @@ snakemake \
 
 Run these commands from the repository root. Adjust `--cores` to the resources available on the machine. The `--conda-prefix` option keeps rule environments under `.conda/rules` in the repository.
 
+To keep Snakemake metadata and locks in a separate run directory, use an absolute
+Snakefile path together with `--directory`. The workflow still loads
+`config/config.yaml` from the cloned repository:
+
+```bash
+REPO=/path/to/pggb-snakemake
+RUN_DIR=/path/to/pggb-run
+
+mkdir -p "$RUN_DIR"
+snakemake \
+  --snakefile "$REPO/Snakefile" \
+  --directory "$RUN_DIR" \
+  --cores 32 \
+  --use-conda \
+  --conda-prefix "$REPO/.conda/rules" \
+  --printshellcmds
+```
+
 If the user home directory is read-only, set a writable Snakemake cache location before running:
 
 ```bash
