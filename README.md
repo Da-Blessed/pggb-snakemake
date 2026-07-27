@@ -17,6 +17,24 @@ Edit `config/samples.tsv` and `config/config.yaml`. Relative FASTA paths are res
 
 `role` must be either `reference` or `query`. Reference sequence regions are configured under `references.regions`.
 
+### FASTA sequence naming
+
+All input FASTA sequence names must already follow the PanSN convention:
+
+```text
+sample#haplotype#contig
+```
+
+For example:
+
+```text
+>HG00438#1#chr1
+>HG00438#2#chr1
+>CHM13#1#chr1
+```
+
+Sequence names must be unique across all input FASTAs. This workflow preserves the existing names and does not automatically convert non-PanSN headers. Use only the first whitespace-delimited field of a FASTA header as the sequence name, and ensure that its `sample` and `haplotype` fields correctly identify the path before running the workflow.
+
 With the default configuration, each partition or PGGB job uses 8 threads. Running with 32 cores allows up to four jobs concurrently.
 
 ## Run
