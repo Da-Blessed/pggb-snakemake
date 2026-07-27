@@ -32,17 +32,17 @@ partitions, merged PGGB inputs, temporary data, final results, and logs:
 | `output_dir` | Final output directory | Final PGGB products organized by chromosome, including ODGI, GFA, VCF, visualization and supporting files, plus `.pggb.done` markers. |
 | `log_dir` | Log directory | Combined-reference, partition, reference-extraction, merge, and chromosome PGGB logs. |
 
-Example using absolute paths:
+Example placeholders (replace every `PATH_TO_*` value with an absolute path):
 
 ```yaml
 paths:
-  samples: /BiO/Install/pangenome_pipelines/pggb-snakemake/config/samples.tsv
-  reference_dir: /BiO/Research/Project2/pangenome_benchmark/Workspace/pggb/references
-  partition_dir: /BiO/Research/Project2/pangenome_benchmark/Resources/hprc10_partitioned
-  merged_dir: /BiO/Research/Project2/pangenome_benchmark/Resources/hprc10_merged
-  work_dir: /BiO/Research/Project2/pangenome_benchmark/Workspace/pggb/tmp
-  output_dir: /BiO/Research/Project2/pangenome_benchmark/Results/pggb
-  log_dir: /BiO/Research/Project2/pangenome_benchmark/Analysis/pggb/log
+  samples: PATH_TO_CONFIG_DIR/samples.tsv
+  reference_dir: PATH_TO_WORKSPACE_DIR/pggb/references
+  partition_dir: PATH_TO_RESOURCE_DIR/hprc10_partitioned
+  merged_dir: PATH_TO_RESOURCE_DIR/hprc10_merged
+  work_dir: PATH_TO_WORKSPACE_DIR/pggb/tmp
+  output_dir: PATH_TO_RESULT_DIR/pggb
+  log_dir: PATH_TO_ANALYSIS_DIR/pggb/log
 ```
 
 The workflow creates the intermediate, work, output, and log directories when
