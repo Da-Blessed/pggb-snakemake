@@ -17,6 +17,39 @@ Edit `config/samples.tsv` and `config/config.yaml`. Relative FASTA paths are res
 
 `role` must be either `reference` or `query`. Reference sequence regions are configured under `references.regions`.
 
+### Path configuration
+
+The entries under `paths` separate input metadata, reusable chromosome
+partitions, merged PGGB inputs, temporary data, final results, and logs:
+
+| Key | Type | Purpose and contents |
+|---|---|---|
+| `samples` | Existing TSV file | Sample names, FASTA paths, and `reference` or `query` roles. This file and every FASTA listed in it must exist before the workflow starts. |
+| `reference_dir` | Intermediate directory | Combined reference FASTA built from samples with `role: reference`: `combined.fa` and `combined.fa.fai`. This is not the directory containing the original reference FASTAs. |
+| `partition_dir` | Intermediate directory | Chromosome-partitioned FASTAs for every query and extracted reference FASTAs, organized under chromosome directories, plus `assignments/*.tsv`. |
+| `merged_dir` | Intermediate directory | Per-chromosome PGGB input files: `{chrom}.merged.fa`, FASTA indexes, and metadata JSON files. These can be large. |
+| `work_dir` | Temporary/work directory | wfmash PAF files, unassigned-contig files, region lists, and chromosome-specific PGGB temporary data under `partition/` and `pggb/`. |
+| `output_dir` | Final output directory | Final PGGB products organized by chromosome, including ODGI, GFA, VCF, visualization and supporting files, plus `.pggb.done` markers. |
+| `log_dir` | Log directory | Combined-reference, partition, reference-extraction, merge, and chromosome PGGB logs. |
+
+Example using absolute paths:
+
+```yaml
+paths:
+  samples: /BiO/Install/pangenome_pipelines/pggb-snakemake/config/samples.tsv
+  reference_dir: /BiO/Research/Project2/pangenome_benchmark/Workspace/pggb/references
+  partition_dir: /BiO/Research/Project2/pangenome_benchmark/Resources/hprc10_partitioned
+  merged_dir: /BiO/Research/Project2/pangenome_benchmark/Resources/hprc10_merged
+  work_dir: /BiO/Research/Project2/pangenome_benchmark/Workspace/pggb/tmp
+  output_dir: /BiO/Research/Project2/pangenome_benchmark/Results/pggb
+  log_dir: /BiO/Research/Project2/pangenome_benchmark/Analysis/pggb/log
+```
+
+The workflow creates the intermediate, work, output, and log directories when
+their rules run. It does not create `samples` or the input FASTA files.
+Scheduler paths such as Grid Engine `-wd`, `-o`, and `-e` are opened before the
+job script starts and therefore must be created before `qsub`.
+
 ### FASTA sequence naming
 
 All input FASTA sequence names must already follow the PanSN convention:
