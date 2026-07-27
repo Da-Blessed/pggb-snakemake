@@ -1,0 +1,58 @@
+paths:
+  samples: config/samples.tsv
+  reference_dir: work/references
+  partition_dir: work/partitioned
+  merged_dir: work/merged
+  work_dir: work/tmp
+  output_dir: results/pggb
+  log_dir: logs
+
+chromosomes:
+  - chr1
+  - chr2
+  - chr3
+  - chr4
+  - chr5
+  - chr6
+  - chr7
+  - chr8
+  - chr9
+  - chr10
+  - chr11
+  - chr12
+  - chr13
+  - chr14
+  - chr15
+  - chr16
+  - chr17
+  - chr18
+  - chr19
+  - chr20
+  - chr21
+  - chr22
+  - chrX
+  - chrY
+  - chrM
+
+references:
+  regions:
+    CHM13: "CHM13#1#{chrom}"
+    GRCh38: "GRCh38#1#{chrom}"
+
+partition:
+  full_identity: 90
+  split_identity: 90
+  split_length: 50000
+  min_query_coverage: 0.99
+
+pggb:
+  identity: 90
+  segment_length: 5k
+  vcf_references: [CHM13, GRCh38]
+  extra_args: []
+
+resources:
+  partition_threads: 8
+  partition_memory_mb: 65536
+  pggb_threads: 8
+  pggb_memory_mb: 131072

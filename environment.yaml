@@ -1,0 +1,8 @@
+name: pggb-snakemake
+channels:
+  - conda-forge
+  - bioconda
+  - nodefaults
+dependencies:
+  - snakemake=9.23.1
+  - conda
