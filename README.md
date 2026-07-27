@@ -25,17 +25,15 @@ With the default configuration, each partition or PGGB job uses 8 threads. Runni
 conda env create -f environment.yaml
 conda activate pggb-snakemake
 
-snakemake \
-  --cores 32 \
-  --use-conda \
-  --conda-frontend conda \
-  --printshellcmds
+./run.sh
 ```
 
 Inspect the DAG without running jobs:
 
 ```bash
-snakemake --dry-run --cores 32 --use-conda
+./run.sh --dry-run
 ```
+
+The wrapper keeps Snakemake caches and rule environments inside the repository, avoiding permission errors when the user home directory is read-only. Override the default core count with `SNAKEMAKE_CORES`, for example `SNAKEMAKE_CORES=16 ./run.sh`.
 
 Per-sample partition logs and per-chromosome PGGB logs are written below `logs/`. Intermediate partition and merged FASTA files are written below `work/`.

@@ -1,4 +1,6 @@
 .snakemake/
+.cache/
+.conda/
 logs/
 results/
 work/
